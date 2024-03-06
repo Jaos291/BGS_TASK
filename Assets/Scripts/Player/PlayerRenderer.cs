@@ -8,13 +8,14 @@ public class PlayerRenderer : MonoBehaviour
 
     public void OnMovement(InputAction.CallbackContext value)
     {
+        float movementValue = value.ReadValue<Vector2>().magnitude;
         Vector2 movementInput = value.ReadValue<Vector2>();
 
-        if ((movementInput.x > 0 && movementInput.y == 0) && PlayerIsLookingLeft())
+        if ((movementInput.x > 0 ) && PlayerIsLookingLeft())
         {
             _spriteRenderer.flipX = false;
         }
-        else if ((movementInput.x < 0 && movementInput.y == 0) && !PlayerIsLookingLeft())
+        else if(movementInput.x < 0 && !PlayerIsLookingLeft() )
         {
             _spriteRenderer.flipX = true;
         }

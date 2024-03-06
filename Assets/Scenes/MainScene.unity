@@ -212,8 +212,8 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
-      - m_Target: {fileID: 389409963}
-        m_TargetAssemblyTypeName: PlayerAnimation, Assembly-CSharp
+      - m_Target: {fileID: 389409964}
+        m_TargetAssemblyTypeName: PlayerRenderer, Assembly-CSharp
         m_MethodName: OnMovement
         m_Mode: 0
         m_Arguments:

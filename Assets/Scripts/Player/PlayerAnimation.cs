@@ -8,22 +8,29 @@ public class PlayerAnimation : MonoBehaviour
 
     public void OnMovement(InputAction.CallbackContext value)
     {
-        Vector2 movementInput = value.ReadValue<Vector2>();
+        TurnOffAllAnimations();
 
-        if (movementInput.x != 0 && movementInput.y == 0)
+        float movementValue = value.ReadValue<Vector2>().magnitude;
+
+        if (movementValue > 0 )
         {
             _animator.SetBool("IsRunning", true);
         }
-        // Check for upward movement
-        else if (movementInput.y > 0)
-        {
-            _animator.SetBool("IsRunningUpwards", true);
-        }
-        // Check for downward movement
-        else if (movementInput.y < 0)
-        {
-            _animator.SetBool("IsRunningDownwards", true);
+        else {
+            _animator.SetBool("IsRunning", false);
         }
     }
 
+    private void TurnOffAllAnimations()
+    {
+        AnimatorControllerParameter[] parameters = _animator.parameters;
+
+        foreach (var parameter in parameters)
+        {
+            if (parameter.type == AnimatorControllerParameterType.Bool)
+            {
+                _animator.SetBool(parameter.name, false);
+            }
+        }
+    }
 }
