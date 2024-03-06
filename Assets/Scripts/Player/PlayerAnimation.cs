@@ -1,18 +1,29 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.InputSystem;
 
 public class PlayerAnimation : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
+    [Header("Dependencies")]
+    [SerializeField] private Animator _animator;
+
+    public void OnMovement(InputAction.CallbackContext value)
     {
-        
+        Vector2 movementInput = value.ReadValue<Vector2>();
+
+        if (movementInput.x != 0 && movementInput.y == 0)
+        {
+            _animator.SetBool("IsRunning", true);
+        }
+        // Check for upward movement
+        else if (movementInput.y > 0)
+        {
+            _animator.SetBool("IsRunningUpwards", true);
+        }
+        // Check for downward movement
+        else if (movementInput.y < 0)
+        {
+            _animator.SetBool("IsRunningDownwards", true);
+        }
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
 }
