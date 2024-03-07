@@ -16,6 +16,19 @@ public class InventoryConsumable
     }
 
 }
+
+public class InventoryWeareable
+{
+    public ItemWeareableSO weareable;
+    public int amount;
+
+    public InventoryWeareable(ItemWeareableSO wareable, int amount)
+    {
+        this.weareable = wareable;
+        this.amount = amount;
+    }
+}
+
 [System.Serializable]
 public class InventoryWeapon
 {
@@ -48,6 +61,9 @@ public class InventorySO : ScriptableObject
 
     [Header("Consumables")]
     public List<InventoryConsumable> consumables = new List<InventoryConsumable>();
+
+    [Header("Clothes")]
+    public List<InventoryWeareable> weareables = new List<InventoryWeareable>();
 
     [Header("Equiped Items")]
     public ItemWeaponSO weapon;

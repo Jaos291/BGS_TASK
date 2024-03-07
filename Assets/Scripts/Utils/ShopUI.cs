@@ -33,9 +33,11 @@ public class ShopUI : MonoBehaviour
     //Public Access to this shop items to use BUY function
     [HideInInspector] public List<ItemWeaponSO> _itemWeapons;
     [HideInInspector] public List<ItemConsumableSO> _itemConsumables;
+    [HideInInspector] public List<ItemWeareableSO> _itemWeareables;
 
     [SerializeField] private GameObject _weaponInventoryItem;
     [SerializeField] private GameObject _consumableInventoryItem;
+    [SerializeField] private GameObject _weareableInventoryItem;
     [SerializeField] private LayoutGroup _playerInventoryGrid;
 
 
@@ -65,6 +67,7 @@ public class ShopUI : MonoBehaviour
         this.ConfigurePlayerWeapons();
         this.ConfigurePlayerConsumables();
         this.ConfigurePlayerGold();
+        this.ConfigurePlayerClothes();
     }
 
     // Private
@@ -200,6 +203,22 @@ public class ShopUI : MonoBehaviour
             this.playerFirstConsumableImage.color = Color.clear;
             this.playerFirstConsumableAmountText.text = null;
         }*/
+    }
+
+    private void ConfigurePlayerClothes()
+    {
+        foreach (var clothes in this._playerInventory.weareables)
+        {
+            _itemWeareables.Add(clothes.weareable);
+            GameObject newItemButton = Instantiate(_weareableInventoryItem);
+            newItemButton.GetComponent<ItemContainer>().SetupWeareableForInventory(
+                clothes.weareable.icon,
+                clothes.weareable.name,
+                "weareable",
+                clothes.weareable.itemID
+                );
+            newItemButton.transform.SetParent(_playerInventoryGrid.transform,false);
+        }
     }
 
     private void ConfigurePlayerGold()

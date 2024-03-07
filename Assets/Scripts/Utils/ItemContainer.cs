@@ -33,6 +33,15 @@ public class ItemContainer : MonoBehaviour
         this.itemType = itemType;
         this.itemID = itemID;
     }
+
+    public void SetupWeareableForInventory(Sprite image, string itemName, string itemType, int itemID)
+    {
+        itemImage.sprite = image;
+        this.itemName.text = itemName;
+        this.itemType = itemType;
+        this.itemID = itemID;
+    }
+
     public void SetupConsumableForInventory(Sprite image, string itemName, string itemType, int itemID, int amount)
     {
         itemImage.sprite = image;
