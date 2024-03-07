@@ -171,7 +171,7 @@ public class ShopUI : MonoBehaviour
                 );
             newItemButton.transform.SetParent(_playerInventoryGrid.transform, false);
         }
-        
+
         /*if (this._playerInventory.consumables.Count > 1)
         {
             // Player has 2 weapons
@@ -206,21 +206,34 @@ public class ShopUI : MonoBehaviour
     }
 
     private void ConfigurePlayerClothes()
-    {
-        foreach (var clothes in this._playerInventory.weareables)
-        {
-            _itemWeareables.Add(clothes.weareable);
-            GameObject newItemButton = Instantiate(_weareableInventoryItem);
-            newItemButton.GetComponent<ItemContainer>().SetupWeareableForInventory(
-                clothes.weareable.icon,
-                clothes.weareable.name,
-                "weareable",
-                clothes.weareable.itemID
-                );
-            newItemButton.transform.SetParent(_playerInventoryGrid.transform,false);
-        }
-    }
 
+    {
+
+        foreach (var clothes in this._playerInventory.weareables)
+
+        {
+
+            _itemWeareables.Add(clothes.weareable);
+
+            GameObject newItemButton = Instantiate(_weareableInventoryItem);
+
+            newItemButton.GetComponent<ItemContainer>().SetupWeareableForInventory(
+
+                clothes.weareable.icon,
+
+                clothes.weareable.name,
+
+                "weareable",
+
+                clothes.weareable.itemID
+
+                );
+
+            newItemButton.transform.SetParent(_playerInventoryGrid.transform, false);
+
+        }
+
+    }
     private void ConfigurePlayerGold()
     {
         this.playerGoldText.text = this._playerInventory.gold.ToString();

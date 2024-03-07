@@ -16,19 +16,6 @@ public class InventoryConsumable
     }
 
 }
-
-public class InventoryWeareable
-{
-    public ItemWeareableSO weareable;
-    public int amount;
-
-    public InventoryWeareable(ItemWeareableSO wareable, int amount)
-    {
-        this.weareable = wareable;
-        this.amount = amount;
-    }
-}
-
 [System.Serializable]
 public class InventoryWeapon
 {
@@ -39,6 +26,28 @@ public class InventoryWeapon
         this.weapon = weapon;
         this.amount = amount;
     }
+}
+
+public class InventoryWeareable
+
+{
+
+    public ItemWeareableSO weareable;
+
+    public int amount;
+
+
+
+    public InventoryWeareable(ItemWeareableSO wareable, int amount)
+
+    {
+
+        this.weareable = wareable;
+
+        this.amount = amount;
+
+    }
+
 }
 public class NpcConversation
 {
@@ -62,7 +71,7 @@ public class InventorySO : ScriptableObject
     [Header("Consumables")]
     public List<InventoryConsumable> consumables = new List<InventoryConsumable>();
 
-    [Header("Clothes")]
+    [Header("Weareables")]
     public List<InventoryWeareable> weareables = new List<InventoryWeareable>();
 
     [Header("Equiped Items")]
@@ -70,10 +79,13 @@ public class InventorySO : ScriptableObject
 
     public ItemWeaponSO shield;
 
+    public ItemWeareableSO weareable;
+
     [Header("Already Created this shop on World")]
     public bool isCreated;
 
     public List<string> talkedNPCs = new List<string>();
+
     public void AddGold(int gold)
     {
         this.gold += Mathf.Abs(gold);
@@ -91,7 +103,7 @@ public class InventorySO : ScriptableObject
 
     public bool AddWeapon(ItemWeaponSO weapon)
     {
-        var weaponFound = this.weapons.Find((c) => { return c.weapon.itemName == weapon.itemName ; });
+        var weaponFound = this.weapons.Find((c) => { return c.weapon.itemName == weapon.itemName; });
         if (weaponFound != null)
         {
             weaponFound.amount += 1;
@@ -122,11 +134,11 @@ public class InventorySO : ScriptableObject
     public bool RemoveWeapon(ItemWeaponSO weapon)
     {
         var weaponFound = this.weapons.Find((c) => { return c.weapon.itemName == weapon.itemName; });
-        if (weaponFound != null) 
+        if (weaponFound != null)
         {
             weaponFound.amount -= 1;
 
-            if (weaponFound.amount==0)
+            if (weaponFound.amount == 0)
             {
                 return this.weapons.Remove(weaponFound);
             }
@@ -160,6 +172,11 @@ public class InventorySO : ScriptableObject
         TryToEquipShield(shield);
     }
 
+    public void EquipWearaeble(ItemWeareableSO weareable)
+    {
+        TryToEquipWeareable(weareable);
+    }
+
     private ItemWeaponSO TryToEquipWeapon(ItemWeaponSO weapon)
     {
         var foundWeapon = this.weapons.Find((c) => { return c.weapon.itemName.Equals(weapon.itemName); });
@@ -179,6 +196,17 @@ public class InventorySO : ScriptableObject
             shield = foundShield.weapon;
         }
         return shield;
+    }
+
+    private ItemWeareableSO TryToEquipWeareable(ItemWeareableSO weareable)
+    {
+        var foundWeareable = this.weareables.Find((c) => { return c.weareable.itemName.Equals(weareable.itemName); });
+        if (foundWeareable != null)
+        {
+            weareable = foundWeareable.weareable;
+        }
+
+        return weareable;
     }
     private void ConsumeConsumable()
     {

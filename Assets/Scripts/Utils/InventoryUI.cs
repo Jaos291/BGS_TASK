@@ -6,13 +6,14 @@ using System.Collections;
 using System.Text;
 using static UnityEditor.Progress;
 
-public class InventoryUI: MonoBehaviour
+public class InventoryUI : MonoBehaviour
 {
-    [SerializeField]private InventorySO playerInventory;
+    [SerializeField] private InventorySO playerInventory;
 
-    [Header("Gameobject for EQUIPED Weapon & shield")]
+    [Header("Gameobject for EQUIPED Weapon, shield & weareables!")]
     [SerializeField] private GameObject _equipedWeaponPrefab;
     [SerializeField] private GameObject _equipedShieldPrefab;
+    [SerializeField] private GameObject _equipedWeareable;
 
     [Header("GameObject for weapon Shield and items")]
     [SerializeField] private GameObject _weaponInventoryItem;
@@ -47,14 +48,19 @@ public class InventoryUI: MonoBehaviour
     [Header("Consumables Grid Layout")]
     [SerializeField] private LayoutGroup _consumablesGrid;
 
+    [Header("Weareables!")]
+    [SerializeField] private LayoutGroup _weareablesGrid;
+
     [Header("KeyItems Grid Layout")]
     [SerializeField] private LayoutGroup _keyItemsGrid;
+
 
     [Header("Gold")]
     [SerializeField] private TextMeshProUGUI _goldValue;
 
     [HideInInspector] public List<ItemWeaponSO> _weaponsAndShield;
     [HideInInspector] public List<ItemConsumableSO> _itemConsumables;
+    [HideInInspector] public List<ItemWeareableSO> _itemWeareables;
 
     [Header("Unequip Buttons")]
     [SerializeField] private Button _unequipWeapon;
@@ -65,6 +71,7 @@ public class InventoryUI: MonoBehaviour
     private List<Button> _weaponButtons = new List<Button>();
     private List<Button> _shieldButtons = new List<Button>();
     private List<Button> _consumableButtons = new List<Button>();
+    private List<Button> _weareablesButtons = new List<Button>();
     private List<Button> _keyButtons = new List<Button>();
     public void CreateButtons()
     {
@@ -95,6 +102,16 @@ public class InventoryUI: MonoBehaviour
                 button.onClick.RemoveAllListeners();
             }
         }
+
+        foreach (Transform weareable in _weareablesGrid.transform)
+        {
+            GameObject.Destroy(weareable.gameObject);
+            foreach (Button button in _weareablesButtons)
+            {
+                button.onClick.RemoveAllListeners();
+            }
+        }
+
         _unequipShield.onClick.RemoveAllListeners();
         _unequipWeapon.onClick.RemoveAllListeners();
     }
@@ -170,6 +187,26 @@ public class InventoryUI: MonoBehaviour
             newButton.onClick.AddListener(() => OnConsumeItemClick(consumable.item, newItemButton.GetComponent<ItemContainer>()));
         }
     }
+
+    public void PopulateWeareables()
+    {
+        foreach (var weareables in this.playerInventory.weareables)
+        {
+            _itemWeareables.Add(weareables.weareable);
+            GameObject newItemButton = Instantiate(_consumableInventoryItem);
+            newItemButton.GetComponent<ItemContainer>().SetupConsumableForInventory(
+                weareables.weareable.icon,
+                weareables.weareable.itemName,
+                "weareable",
+                weareables.weareable.itemID,
+                weareables.amount
+                );
+            newItemButton.transform.SetParent(_consumablesGrid.transform, false);
+            Button newButton = newItemButton.GetComponent<Button>();
+            newButton.onClick.AddListener(() => OnEquipoWeareableClick(weareables.weareable));
+        }
+    }
+
     private void EquipItem(ItemWeaponSO itemWeaponSO)
     {
 
@@ -202,6 +239,19 @@ public class InventoryUI: MonoBehaviour
         }
         SetPlayerStats();
     }
+
+    private void EquipWeareable(ItemWeareableSO itemWeareableSO)
+    {
+        _equipedWeareable.GetComponent<ItemContainer>().SetupWeareableForInventory(
+            itemWeareableSO.icon,
+            itemWeareableSO.itemName,
+            "weareable",
+            itemWeareableSO.itemID
+            );
+        this.playerInventory.EquipWearaeble(itemWeareableSO);
+        this.playerInventory.weareable = itemWeareableSO;
+        this.playerInventory.playerUnit.defense = this.playerInventory.weareable.defense + this.playerInventory.playerUnit.baseDefense;
+    }
     private void ConsumeItem(ItemConsumableSO itemSO, ItemContainer itemContainer)
     {
         if (itemSO.consumable)
@@ -224,6 +274,12 @@ public class InventoryUI: MonoBehaviour
     {
         EquipItem(itemSO);
     }
+
+    private void OnEquipoWeareableClick(ItemWeareableSO weareableSO)
+    {
+        EquipWeareable(weareableSO);
+    }
+
     private void OnConsumeItemClick(ItemConsumableSO itemSO, ItemContainer itemContainer)
     {
         ConsumeItem(itemSO, itemContainer);

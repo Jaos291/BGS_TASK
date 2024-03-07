@@ -33,15 +33,6 @@ public class ItemContainer : MonoBehaviour
         this.itemType = itemType;
         this.itemID = itemID;
     }
-
-    public void SetupWeareableForInventory(Sprite image, string itemName, string itemType, int itemID)
-    {
-        itemImage.sprite = image;
-        this.itemName.text = itemName;
-        this.itemType = itemType;
-        this.itemID = itemID;
-    }
-
     public void SetupConsumableForInventory(Sprite image, string itemName, string itemType, int itemID, int amount)
     {
         itemImage.sprite = image;
@@ -49,6 +40,20 @@ public class ItemContainer : MonoBehaviour
         this.itemType = itemType;
         this.itemID = itemID;
         this.amount.text = amount.ToString();
+    }
+
+    public void SetupWeareableForInventory(Sprite image, string itemName, string itemType, int itemID)
+
+    {
+
+        itemImage.sprite = image;
+
+        this.itemName.text = itemName;
+
+        this.itemType = itemType;
+
+        this.itemID = itemID;
+
     }
     public void SetUpConsumableForBattle(Sprite image, string itemName, int itemID, int amount)
     {
@@ -59,7 +64,7 @@ public class ItemContainer : MonoBehaviour
     }
     public void SetUpWeaponForBattle(Sprite image, string itemName)
     {
-        itemImage.sprite= image;
+        itemImage.sprite = image;
         this.itemName.text = itemName;
     }
     public void SetupItemForEquiped(Sprite image, string itemName)
@@ -77,14 +82,14 @@ public class ItemContainer : MonoBehaviour
     public void ConsumeItem()
     {
         int actualConsumablesAmount = int.Parse(this.amount.text);
-        if (actualConsumablesAmount != 0) 
+        if (actualConsumablesAmount != 0)
         {
-            actualConsumablesAmount -=1;
+            actualConsumablesAmount -= 1;
         }
         this.amount.text = actualConsumablesAmount.ToString();
     }
-    public void ShowDescription()
+    public void SellItem(int itemCost)
     {
-
+        int itemCostReduced = itemCost * (int)0.50;
     }
 }

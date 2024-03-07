@@ -8,6 +8,7 @@ public abstract class ItemSO : ScriptableObject
     public bool weapon;
     public bool shield;
     public bool consumable;
+    public bool weareable;
     [Header("UNIQUE ITEM ID")]
     public int itemID;
     [Header("UNIQUE ITEM DESCRIPTIO")]

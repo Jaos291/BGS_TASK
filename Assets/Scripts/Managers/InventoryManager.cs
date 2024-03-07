@@ -5,7 +5,7 @@ using UnityEngine.Events;
 using UnityEngine.UI;
 using TMPro;
 
-public class InventoryManager: MonoBehaviour
+public class InventoryManager : MonoBehaviour
 {
     [Header("Dependencies")]
     public InventoryUI inventoryUI;
@@ -28,6 +28,9 @@ public class InventoryManager: MonoBehaviour
 
         //Populate Consumables
         inventoryUI.PopulateConsumables();
+
+        //Populate Weareables
+        inventoryUI.PopulateWeareables();
 
         //Load Equiped Items On Save File
         inventoryUI.LoadEquipedItems();
