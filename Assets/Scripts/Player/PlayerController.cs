@@ -7,21 +7,17 @@ public class PlayerController : MonoBehaviour
     public float speed;
 
     [Header("Dependencies")]
-    public Rigidbody2D rigidbody;
+    public Rigidbody2D _rigidbody;
 
-
-    // Private
     private Vector2 _movementInput;
-
-
-    private void FixedUpdate()
-    {
-        rigidbody.velocity = _movementInput * speed;
-    }
 
     public void OnMovement(InputAction.CallbackContext value)
     {
         _movementInput = value.ReadValue<Vector2>();
+    }
+    private void FixedUpdate()
+    {
+        _rigidbody.velocity = _movementInput * speed;
     }
 
 }

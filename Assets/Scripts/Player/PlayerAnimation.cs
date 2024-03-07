@@ -8,6 +8,7 @@ public class PlayerAnimation : MonoBehaviour
 
     public void OnMovement(InputAction.CallbackContext value)
     {
+        
         float movementInput = value.ReadValue<Vector2>().magnitude;
 
         if (movementInput > 0f)
@@ -18,7 +19,5 @@ public class PlayerAnimation : MonoBehaviour
         {
             animator.SetBool("IsRunning", false);
         }
-
-        // animator.SetBool("IsRunning", movementInput != Vector2.zero);
     }
 }
