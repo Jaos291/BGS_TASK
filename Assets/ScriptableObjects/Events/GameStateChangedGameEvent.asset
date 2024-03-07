@@ -9,7 +9,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7b6d69005c32a3f4a91e8b8b0e3dea1a, type: 3}
+  m_Script: {fileID: 11500000, guid: 2cf7caacb4b61467ca9ce289c7f3225f, type: 3}
   m_Name: GameStateChangedGameEvent
   m_EditorClassIdentifier: 
   _debugValue: {fileID: 0}

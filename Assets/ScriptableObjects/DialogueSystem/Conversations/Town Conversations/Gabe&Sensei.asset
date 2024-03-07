@@ -1,0 +1,52 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e13e01f58019a4b14b8aab03af3f6763, type: 3}
+  m_Name: Gabe&Sensei
+  m_EditorClassIdentifier: 
+  playerInventory: {fileID: 11400000, guid: 6fb206545444448df8d0c7123cd2c7f8, type: 2}
+  ConversationName: Sensei#1
+  alreadyTalked: 1
+  alreadyGaveItem: 0
+  leftCharacter: {fileID: 11400000, guid: bc4e513d32e4440619ddf9d95c622354, type: 2}
+  rightCharacter: {fileID: 11400000, guid: e75b7b4ed9eab49a9a2fb728042ea0d5, type: 2}
+  buttonContinueText: 
+  buttonFinishText: Thanks Sensei!
+  sentences:
+  - character: {fileID: 11400000, guid: bc4e513d32e4440619ddf9d95c622354, type: 2}
+    text: Hi sensei...
+    giveWeaponHere: 0
+    giveItemHere: 0
+    weapon: {fileID: 0}
+    consumable: {fileID: 0}
+    playerInventory: {fileID: 0}
+  - character: {fileID: 11400000, guid: e75b7b4ed9eab49a9a2fb728042ea0d5, type: 2}
+    text: It's dangerous to go alone, take this!
+    giveWeaponHere: 0
+    giveItemHere: 0
+    weapon: {fileID: 0}
+    consumable: {fileID: 0}
+    playerInventory: {fileID: 0}
+  - character: {fileID: 11400000, guid: e75b7b4ed9eab49a9a2fb728042ea0d5, type: 2}
+    text: YOU GOT A SWORD
+    giveWeaponHere: 1
+    giveItemHere: 0
+    weapon: {fileID: 11400000, guid: 96a20140d9d3c4dd28ba2f52f2eb3c69, type: 2}
+    consumable: {fileID: 0}
+    playerInventory: {fileID: 11400000, guid: 6fb206545444448df8d0c7123cd2c7f8, type: 2}
+  AlreadyTalkedSentences:
+  - character: {fileID: 11400000, guid: e75b7b4ed9eab49a9a2fb728042ea0d5, type: 2}
+    text: That sword was made for SOFT COMBAT...
+    giveWeaponHere: 0
+    giveItemHere: 0
+    weapon: {fileID: 0}
+    consumable: {fileID: 0}
+    playerInventory: {fileID: 0}

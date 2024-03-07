@@ -3,26 +3,25 @@ using UnityEngine.InputSystem;
 
 public class PlayerRenderer : MonoBehaviour
 {
-    [Header("SpriteRenderer")]
-    [SerializeField] private SpriteRenderer _spriteRenderer;
+    [Header("Dependencies")]
+    public SpriteRenderer spriteRenderer;
 
     public void OnMovement(InputAction.CallbackContext value)
     {
-        float movementValue = value.ReadValue<Vector2>().magnitude;
         Vector2 movementInput = value.ReadValue<Vector2>();
 
-        if ((movementInput.x > 0 ) && PlayerIsLookingLeft())
+        if (movementInput.x > 0f && PlayerIsLookingLeft()) // Moving to the right
         {
-            _spriteRenderer.flipX = false;
+            spriteRenderer.flipX = false;
         }
-        else if(movementInput.x < 0 && !PlayerIsLookingLeft() )
+        else if (movementInput.x < 0f && !PlayerIsLookingLeft()) // Moving to the left
         {
-            _spriteRenderer.flipX = true;
+            spriteRenderer.flipX = true;
         }
     }
 
     private bool PlayerIsLookingLeft()
     {
-        return _spriteRenderer.flipX;
+        return spriteRenderer.flipX;
     }
 }

@@ -1,0 +1,58 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e13e01f58019a4b14b8aab03af3f6763, type: 3}
+  m_Name: ManiConversation
+  m_EditorClassIdentifier: 
+  playerInventory: {fileID: 11400000, guid: 6fb206545444448df8d0c7123cd2c7f8, type: 2}
+  alreadyTalked: 1
+  alreadyGaveItem: 1
+  leftCharacter: {fileID: 11400000, guid: bc4e513d32e4440619ddf9d95c622354, type: 2}
+  rightCharacter: {fileID: 11400000, guid: 822cf1ff551c54f4099e4267c131edd3, type: 2}
+  buttonContinueText: 
+  buttonFinishText: Sure bby
+  sentences:
+  - character: {fileID: 11400000, guid: bc4e513d32e4440619ddf9d95c622354, type: 2}
+    text: Hi!
+    giveWeaponHere: 0
+    giveItemHere: 0
+    weapon: {fileID: 0}
+    consumable: {fileID: 0}
+    playerInventory: {fileID: 0}
+  - character: {fileID: 11400000, guid: 822cf1ff551c54f4099e4267c131edd3, type: 2}
+    text: La tienes grande
+    giveWeaponHere: 0
+    giveItemHere: 0
+    weapon: {fileID: 0}
+    consumable: {fileID: 0}
+    playerInventory: {fileID: 0}
+  - character: {fileID: 11400000, guid: 822cf1ff551c54f4099e4267c131edd3, type: 2}
+    text: Btw there you go a BIG POTION!
+    giveWeaponHere: 0
+    giveItemHere: 1
+    weapon: {fileID: 0}
+    consumable: {fileID: 11400000, guid: dbac8a62919a04fa28a0347fc4431218, type: 2}
+    playerInventory: {fileID: 11400000, guid: 6fb206545444448df8d0c7123cd2c7f8, type: 2}
+  - character: {fileID: 11400000, guid: 822cf1ff551c54f4099e4267c131edd3, type: 2}
+    text: Hope we can fuck all night!
+    giveWeaponHere: 0
+    giveItemHere: 1
+    weapon: {fileID: 0}
+    consumable: {fileID: 0}
+    playerInventory: {fileID: 0}
+  AlreadyTalkedSentences:
+  - character: {fileID: 11400000, guid: 822cf1ff551c54f4099e4267c131edd3, type: 2}
+    text: Hope we can fuck all night!
+    giveWeaponHere: 0
+    giveItemHere: 0
+    weapon: {fileID: 0}
+    consumable: {fileID: 0}
+    playerInventory: {fileID: 0}

@@ -4,33 +4,21 @@ using UnityEngine.InputSystem;
 public class PlayerAnimation : MonoBehaviour
 {
     [Header("Dependencies")]
-    [SerializeField] private Animator _animator;
+    public Animator animator;
 
     public void OnMovement(InputAction.CallbackContext value)
     {
-        TurnOffAllAnimations();
+        float movementInput = value.ReadValue<Vector2>().magnitude;
 
-        float movementValue = value.ReadValue<Vector2>().magnitude;
-
-        if (movementValue > 0 )
+        if (movementInput > 0f)
         {
-            _animator.SetBool("IsRunning", true);
+            animator.SetBool("IsRunning", true);
         }
-        else {
-            _animator.SetBool("IsRunning", false);
-        }
-    }
-
-    private void TurnOffAllAnimations()
-    {
-        AnimatorControllerParameter[] parameters = _animator.parameters;
-
-        foreach (var parameter in parameters)
+        else
         {
-            if (parameter.type == AnimatorControllerParameterType.Bool)
-            {
-                _animator.SetBool(parameter.name, false);
-            }
+            animator.SetBool("IsRunning", false);
         }
+
+        // animator.SetBool("IsRunning", movementInput != Vector2.zero);
     }
 }
