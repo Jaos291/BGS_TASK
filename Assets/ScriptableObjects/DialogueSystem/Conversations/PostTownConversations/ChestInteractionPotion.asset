@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   playerInventory: {fileID: 11400000, guid: 6fb206545444448df8d0c7123cd2c7f8, type: 2}
   ConversationName: Chest1PostTown
-  alreadyTalked: 1
+  alreadyTalked: 0
   alreadyGaveItem: 0
   leftCharacter: {fileID: 11400000, guid: bc4e513d32e4440619ddf9d95c622354, type: 2}
   rightCharacter: {fileID: 11400000, guid: a2fc3d530ae712c48a672a4080804c73, type: 2}

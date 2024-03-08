@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   playerInventory: {fileID: 11400000, guid: 6fb206545444448df8d0c7123cd2c7f8, type: 2}
   ConversationName: Sensei#1
-  alreadyTalked: 1
+  alreadyTalked: 0
   alreadyGaveItem: 0
   leftCharacter: {fileID: 11400000, guid: bc4e513d32e4440619ddf9d95c622354, type: 2}
   rightCharacter: {fileID: 11400000, guid: e75b7b4ed9eab49a9a2fb728042ea0d5, type: 2}

@@ -11395,6 +11395,10 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 3806274248193609595, guid: 9373800b4dee92a47aafb931fed1e1e8, type: 3}
     - target: {fileID: 6221892963608582548, guid: 15b421b4ab4fb49098ae164cb122e117, type: 3}
+      propertyPath: _weareableInventoryItem
+      value: 
+      objectReference: {fileID: 3806274248193609595, guid: 02073a1a504509045a9bfd720505914b, type: 3}
+    - target: {fileID: 6221892963608582548, guid: 15b421b4ab4fb49098ae164cb122e117, type: 3}
       propertyPath: _consumableInventoryItem
       value: 
       objectReference: {fileID: 3806274248193609595, guid: 04a2a31878e1bdd44afb21d2425dbbd8, type: 3}
