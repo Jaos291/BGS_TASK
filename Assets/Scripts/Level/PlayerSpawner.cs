@@ -12,7 +12,7 @@ public class PlayerSpawner : MonoBehaviour
     [HideInInspector] public GameObject playerReference;
 
     public static PlayerSpawner Instance;
-
+    public string currentAnimationState = "Default";
 
     private void Awake()
     {
@@ -29,6 +29,16 @@ public class PlayerSpawner : MonoBehaviour
         playerReference = player;
         // When player is instantiated and moved, reset path
         playerPath.levelEntrance = null;
+        Animator animator = PlayerSpawner.Instance.playerReference.GetComponent<Animator>();
+        foreach (AnimatorControllerParameter parameter in PlayerSpawner.Instance.playerReference.GetComponent<Animator>().parameters)
+        {
+            if (parameter.type.Equals(AnimatorControllerParameterType.Bool))
+            {
+                animator.SetBool(parameter.name, false);
+            }
+        }
+
+        PlayerSpawner.Instance.playerReference.GetComponent<Animator>().SetBool(currentAnimationState, true);
     }
 
     private GameObject GetPlayer()
