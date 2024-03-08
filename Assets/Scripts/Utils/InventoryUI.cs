@@ -6,9 +6,9 @@ using System.Collections;
 using System.Text;
 using static UnityEditor.Progress;
 
-public class InventoryUI : MonoBehaviour
+public class InventoryUI: MonoBehaviour
 {
-    [SerializeField] private InventorySO playerInventory;
+    [SerializeField]private InventorySO playerInventory;
 
     [Header("Gameobject for EQUIPED Weapon, shield & weareables!")]
     [SerializeField] private GameObject _equipedWeaponPrefab;
@@ -18,6 +18,7 @@ public class InventoryUI : MonoBehaviour
     [Header("GameObject for weapon Shield and items")]
     [SerializeField] private GameObject _weaponInventoryItem;
     [SerializeField] private GameObject _consumableInventoryItem;
+    [SerializeField] private GameObject _weareableInventoryItem;
 
     [Header("Player Combat Unit Info")]
     [SerializeField] private TextMeshProUGUI _currentHP;
@@ -53,7 +54,7 @@ public class InventoryUI : MonoBehaviour
 
     [Header("KeyItems Grid Layout")]
     [SerializeField] private LayoutGroup _keyItemsGrid;
-
+    
 
     [Header("Gold")]
     [SerializeField] private TextMeshProUGUI _goldValue;
@@ -65,6 +66,7 @@ public class InventoryUI : MonoBehaviour
     [Header("Unequip Buttons")]
     [SerializeField] private Button _unequipWeapon;
     [SerializeField] private Button _unequipShield;
+    [SerializeField] private Button _unequipWeareable;
 
 
     //Buttons group for each weapon, shield, item and consumable;
@@ -114,9 +116,11 @@ public class InventoryUI : MonoBehaviour
 
         _unequipShield.onClick.RemoveAllListeners();
         _unequipWeapon.onClick.RemoveAllListeners();
+        _unequipWeareable.onClick.RemoveAllListeners();
     }
     public void LoadWeaponsAndShieldsForInventory()
     {
+        //Adding Weapons
         foreach (var weapon in playerInventory.weapons)
         {
             _weaponsAndShield.Add(weapon.weapon);
@@ -125,6 +129,11 @@ public class InventoryUI : MonoBehaviour
         foreach (var consumable in playerInventory.consumables)
         {
             _itemConsumables.Add(consumable.item);
+        }
+        //Adding Weareables
+        foreach (var weareable in playerInventory.weareables)
+        {
+            _itemWeareables.Add(weareable.weareable);
         }
     }
     public void PopulateWeapons()
@@ -190,18 +199,18 @@ public class InventoryUI : MonoBehaviour
 
     public void PopulateWeareables()
     {
+        int i = 0;
         foreach (var weareables in this.playerInventory.weareables)
         {
             _itemWeareables.Add(weareables.weareable);
-            GameObject newItemButton = Instantiate(_consumableInventoryItem);
-            newItemButton.GetComponent<ItemContainer>().SetupConsumableForInventory(
+            GameObject newItemButton = Instantiate(_weareableInventoryItem);
+            newItemButton.GetComponent<ItemContainer>().SetupWeareableForInventory(
                 weareables.weareable.icon,
                 weareables.weareable.itemName,
                 "weareable",
-                weareables.weareable.itemID,
-                weareables.amount
+                weareables.weareable.itemID
                 );
-            newItemButton.transform.SetParent(_consumablesGrid.transform, false);
+            newItemButton.transform.SetParent(_weareablesGrid.transform, false);
             Button newButton = newItemButton.GetComponent<Button>();
             newButton.onClick.AddListener(() => OnEquipoWeareableClick(weareables.weareable));
         }
@@ -222,6 +231,7 @@ public class InventoryUI : MonoBehaviour
                 this.playerInventory.weapon = itemWeaponSO;
                 this.playerInventory.playerUnit.attackPower = this.playerInventory.weapon.attackPower + this.playerInventory.playerUnit.baseAttackPower;
             }
+
 
         }
         else if (itemWeaponSO.shield)
@@ -251,6 +261,16 @@ public class InventoryUI : MonoBehaviour
         this.playerInventory.EquipWearaeble(itemWeareableSO);
         this.playerInventory.weareable = itemWeareableSO;
         this.playerInventory.playerUnit.defense = this.playerInventory.weareable.defense + this.playerInventory.playerUnit.baseDefense;
+       /* Animator animator = PlayerSpawner.Instance.playerReference.GetComponent<Animator>();
+        foreach (AnimatorControllerParameter parameter in PlayerSpawner.Instance.playerReference.GetComponent<Animator>().parameters)
+        {
+            if (parameter.type.Equals(AnimatorControllerParameterType.Bool))
+            {
+                animator.SetBool(parameter.name,false);
+            }
+        }
+        PlayerSpawner.Instance.playerReference.GetComponent<Animator>().SetBool(itemWeareableSO.animationType,true);*/
+        SetPlayerStats();
     }
     private void ConsumeItem(ItemConsumableSO itemSO, ItemContainer itemContainer)
     {

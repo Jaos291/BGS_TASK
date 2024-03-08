@@ -4,6 +4,8 @@ using UnityEngine;
 [CreateAssetMenu(fileName = "NewUnit", menuName = "Scriptable Objects/Combat/Unit")]
 public class CombatUnitSO : ScriptableObject
 {
+    public Sprite[] sprites;
+
     public string unitName;
 
     public float baseHP;

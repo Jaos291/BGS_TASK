@@ -19,7 +19,7 @@ MonoBehaviour:
   leftCharacter: {fileID: 11400000, guid: bc4e513d32e4440619ddf9d95c622354, type: 2}
   rightCharacter: {fileID: 11400000, guid: 81f6f98e51606b74aa9b425813401788, type: 2}
   buttonContinueText: 
-  buttonFinishText: 
+  buttonFinishText: GO!
   sentences:
   - character: {fileID: 11400000, guid: 81f6f98e51606b74aa9b425813401788, type: 2}
     text: Town Ahead
@@ -28,4 +28,11 @@ MonoBehaviour:
     weapon: {fileID: 0}
     consumable: {fileID: 0}
     playerInventory: {fileID: 0}
-  AlreadyTalkedSentences: []
+  AlreadyTalkedSentences:
+  - character: {fileID: 11400000, guid: 81f6f98e51606b74aa9b425813401788, type: 2}
+    text: Town Ahead
+    giveWeaponHere: 0
+    giveItemHere: 0
+    weapon: {fileID: 0}
+    consumable: {fileID: 0}
+    playerInventory: {fileID: 0}

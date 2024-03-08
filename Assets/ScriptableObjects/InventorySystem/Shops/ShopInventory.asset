@@ -26,7 +26,15 @@ MonoBehaviour:
     amount: 5
   - item: {fileID: 11400000, guid: dbac8a62919a04fa28a0347fc4431218, type: 2}
     amount: 5
-  sword: {fileID: 0}
+  weareables:
+  - weareable: {fileID: 11400000, guid: 78226b9cf4d41514581175b44305f4d4, type: 2}
+    amount: 0
+  - weareable: {fileID: 11400000, guid: acb9de720356da844929c3137f47f81e, type: 2}
+    amount: 0
+  - weareable: {fileID: 11400000, guid: 74bf58918f9525047ba6ee38be1fcf5e, type: 2}
+    amount: 0
+  weapon: {fileID: 0}
   shield: {fileID: 0}
+  weareable: {fileID: 0}
   isCreated: 1
   talkedNPCs: []

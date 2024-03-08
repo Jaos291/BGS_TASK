@@ -49,7 +49,7 @@ public class ShopUI : MonoBehaviour
     public GameObject itemDescriptionGameObject;
     public TextMeshProUGUI itemDescription;
     // Public functions
-    public void SetupHUD(InventorySO shopInventory, List<int> weaponPrices, List<int> consumablePrices, InventorySO playerInventory)
+    public void SetupHUD(InventorySO shopInventory, List<int> weaponPrices, List<int> consumablePrices, List<int> weareablePrices, InventorySO playerInventory)
     {
 
         //References
@@ -171,7 +171,7 @@ public class ShopUI : MonoBehaviour
                 );
             newItemButton.transform.SetParent(_playerInventoryGrid.transform, false);
         }
-
+        
         /*if (this._playerInventory.consumables.Count > 1)
         {
             // Player has 2 weapons

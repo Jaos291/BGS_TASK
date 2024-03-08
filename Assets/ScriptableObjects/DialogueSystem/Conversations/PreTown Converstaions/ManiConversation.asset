@@ -13,6 +13,7 @@ MonoBehaviour:
   m_Name: ManiConversation
   m_EditorClassIdentifier: 
   playerInventory: {fileID: 11400000, guid: 6fb206545444448df8d0c7123cd2c7f8, type: 2}
+  ConversationName: 
   alreadyTalked: 1
   alreadyGaveItem: 1
   leftCharacter: {fileID: 11400000, guid: bc4e513d32e4440619ddf9d95c622354, type: 2}
@@ -28,7 +29,7 @@ MonoBehaviour:
     consumable: {fileID: 0}
     playerInventory: {fileID: 0}
   - character: {fileID: 11400000, guid: 822cf1ff551c54f4099e4267c131edd3, type: 2}
-    text: La tienes grande
+    text: Well, look who is here...
     giveWeaponHere: 0
     giveItemHere: 0
     weapon: {fileID: 0}
@@ -42,15 +43,15 @@ MonoBehaviour:
     consumable: {fileID: 11400000, guid: dbac8a62919a04fa28a0347fc4431218, type: 2}
     playerInventory: {fileID: 11400000, guid: 6fb206545444448df8d0c7123cd2c7f8, type: 2}
   - character: {fileID: 11400000, guid: 822cf1ff551c54f4099e4267c131edd3, type: 2}
-    text: Hope we can fuck all night!
+    text: Hope you stay alive
     giveWeaponHere: 0
-    giveItemHere: 1
+    giveItemHere: 0
     weapon: {fileID: 0}
     consumable: {fileID: 0}
     playerInventory: {fileID: 0}
   AlreadyTalkedSentences:
   - character: {fileID: 11400000, guid: 822cf1ff551c54f4099e4267c131edd3, type: 2}
-    text: Hope we can fuck all night!
+    text: Don't stay long here...
     giveWeaponHere: 0
     giveItemHere: 0
     weapon: {fileID: 0}

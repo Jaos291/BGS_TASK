@@ -64,7 +64,7 @@ public class ItemContainer : MonoBehaviour
     }
     public void SetUpWeaponForBattle(Sprite image, string itemName)
     {
-        itemImage.sprite = image;
+        itemImage.sprite= image;
         this.itemName.text = itemName;
     }
     public void SetupItemForEquiped(Sprite image, string itemName)
@@ -82,9 +82,9 @@ public class ItemContainer : MonoBehaviour
     public void ConsumeItem()
     {
         int actualConsumablesAmount = int.Parse(this.amount.text);
-        if (actualConsumablesAmount != 0)
+        if (actualConsumablesAmount != 0) 
         {
-            actualConsumablesAmount -= 1;
+            actualConsumablesAmount -=1;
         }
         this.amount.text = actualConsumablesAmount.ToString();
     }

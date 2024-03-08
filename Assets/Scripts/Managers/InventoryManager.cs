@@ -5,7 +5,7 @@ using UnityEngine.Events;
 using UnityEngine.UI;
 using TMPro;
 
-public class InventoryManager : MonoBehaviour
+public class InventoryManager: MonoBehaviour
 {
     [Header("Dependencies")]
     public InventoryUI inventoryUI;

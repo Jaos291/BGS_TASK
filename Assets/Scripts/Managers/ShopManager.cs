@@ -18,11 +18,13 @@ public class ShopManager : MonoBehaviour
 
     [HideInInspector] public List<ItemWeaponSO> _itemWeapons;
     [HideInInspector] public List<ItemConsumableSO> _itemConsumables;
+    [HideInInspector] public List<ItemWeareableSO> _itemWeareables;
     ///////
 
     [Header("Shop Configuration")]
     private List<int> weaponsPrices = new List<int>();
     private List<int> consumablePrices = new List<int>();
+    private List<int> weareablePrices = new List<int>();
 
     [Header("Action events")]
     public UnityEvent onShopOpened;
@@ -32,22 +34,31 @@ public class ShopManager : MonoBehaviour
 
     private List<Button> _weaponButtons = new List<Button>();
     private List<Button> _consumableButtons = new List<Button>();
+    private List<Button> _weareableButtons = new List<Button>();
     public void OpenShop(InventorySO shopInventory)
     {
         if (this._shopInventory != null)
             return;
 
         this._shopInventory = shopInventory;
+
         foreach (var item in this._shopInventory.weapons)
         {
             weaponsPrices.Add(item.weapon.price);
         }
+
         foreach (var item in this._shopInventory.consumables)
         {
             consumablePrices.Add(item.item.price);
         }
-        this.shopUI.SetupHUD(this._shopInventory, this.weaponsPrices, this.consumablePrices, this.playerInventory);
-        
+
+        foreach (var item in this._shopInventory.weareables)
+        {
+            weareablePrices.Add(item.weareable.price);
+        }
+
+        this.shopUI.SetupHUD(this._shopInventory, this.weaponsPrices, this.consumablePrices, this.weareablePrices, this.playerInventory);
+
         //Set buttons for each Weapon / Consumable
 
         foreach (Transform item in layoutGroup.transform)
@@ -64,6 +75,7 @@ public class ShopManager : MonoBehaviour
             _itemWeapons.Clear();
             _weaponButtons.Clear();
             _consumableButtons.Clear();
+            _weareableButtons.Clear();
         }
         foreach (var weapon in this._shopInventory.weapons)
         {
@@ -122,6 +134,29 @@ public class ShopManager : MonoBehaviour
             Button descriptionButton = newItemButton.GetComponent<Button>();
             descriptionButton.onClick.AddListener(() => OnDescriptionItemClicked(consumable.item));
         }
+
+        foreach (var weareable in this._shopInventory.weareables)
+        {
+            _itemWeareables.Add(weareable.weareable);
+            GameObject newItemButton = Instantiate(itemPrefab);
+            newItemButton.GetComponent<ItemContainer>().SetupItemForShop(
+                weareable.weareable.icon,
+                weareable.weareable.itemName,
+                weareable.weareable.price,
+                "weareable",
+                weareable.weareable.itemID,
+                weareable.weareable.itemDescription
+                );
+            newItemButton.transform.SetParent(layoutGroup.transform, false);
+            _consumableButtons.Add(newItemButton.GetComponent<Button>());
+
+            Button newButton = newItemButton.GetComponent<ItemContainer>().buyButton;
+            newButton.onClick.AddListener(() => OnBuyItemClicked(weareable.weareable));
+
+            Button descriptionButton = newItemButton.GetComponent<Button>();
+            descriptionButton.onClick.AddListener(() => OnDescriptionItemClicked(weareable.weareable));
+        }
+
         //Create Listener for each button
 
 
@@ -138,6 +173,7 @@ public class ShopManager : MonoBehaviour
         _itemWeapons.Clear();
         _weaponButtons.Clear();
         _consumableButtons.Clear();
+        _weaponButtons.Clear();
         this._shopInventory = null;
 
         if (this.onShopClosed != null)
@@ -188,6 +224,45 @@ public class ShopManager : MonoBehaviour
             this.playerInventory.GetGold(itemPrice);
             this.playerInventory.AddConsumable(shopItem.item);
             this._shopInventory.RemoveConsumable(shopItem.item,0);
+            this.shopUI.SetupPlayerHUDforShop();
+        }
+
+        else if (itemSO.weareable){
+            var weareableIndex = itemId % 2;
+            var itemPrice = this.weaponsPrices[weareableIndex];
+
+            if (this.playerInventory.gold < itemPrice)
+            { // No money no shopping
+                shopUI.EnableWarningText("Not Enough Cash");
+                return;
+            }
+
+
+            var shopItem = this._shopInventory.weareables[weareableIndex];
+
+            Animator animator = PlayerSpawner.Instance.playerReference.GetComponent<Animator>();
+            foreach (AnimatorControllerParameter parameter in PlayerSpawner.Instance.playerReference.GetComponent<Animator>().parameters)
+            {
+                if (parameter.type.Equals(AnimatorControllerParameterType.Bool))
+                {
+                    animator.SetBool(parameter.name, false);
+                }
+            }
+
+            PlayerSpawner.Instance.playerReference.GetComponent<Animator>().SetBool(this._shopInventory.weareables[itemId].weareable.animationType, true);
+
+            foreach (var weareable in playerInventory.weareables)
+            {
+                if (weareable.weareable.itemName.Equals(shopItem.weareable.itemName))
+                {
+                    shopUI.EnableWarningText("Weared!");
+                    return;
+                }
+            }
+
+            this.playerInventory.GetGold(itemPrice);
+            this.playerInventory.AddWeareable(shopItem.weareable);
+            this._shopInventory.RemoveWeareable(shopItem.weareable, 0);
             this.shopUI.SetupPlayerHUDforShop();
         }
     }

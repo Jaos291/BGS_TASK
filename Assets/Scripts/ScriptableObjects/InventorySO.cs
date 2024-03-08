@@ -28,6 +28,7 @@ public class InventoryWeapon
     }
 }
 
+[System.Serializable]
 public class InventoryWeareable
 
 {
@@ -59,6 +60,9 @@ public class NpcConversation
 [CreateAssetMenu(fileName = "NewInventory", menuName = "Scriptable Objects/Inventory/Inventory")]
 public class InventorySO : ScriptableObject
 {
+    [Header("Sprites")]
+    public Sprite[] sprites;
+
     [Header("Combat Unit")]
     public CombatUnitSO playerUnit;
 
@@ -103,7 +107,7 @@ public class InventorySO : ScriptableObject
 
     public bool AddWeapon(ItemWeaponSO weapon)
     {
-        var weaponFound = this.weapons.Find((c) => { return c.weapon.itemName == weapon.itemName; });
+        var weaponFound = this.weapons.Find((c) => { return c.weapon.itemName == weapon.itemName ; });
         if (weaponFound != null)
         {
             weaponFound.amount += 1;
@@ -131,14 +135,32 @@ public class InventorySO : ScriptableObject
 
         return true;
     }
+
+    public bool AddWeareable(ItemWeareableSO weareable)
+    {
+        var weareableFound = this.weareables.Find((c) => { return c.weareable.itemName == weareable.itemName; });
+
+        if (weareableFound != null)
+        {
+            weareableFound.amount += 1;
+        }
+        else
+        {
+            var newInventoryConsumable = new InventoryWeareable(weareable, 1);
+            this.weareables.Add(newInventoryConsumable);
+        }
+
+        return true;
+    }
+
     public bool RemoveWeapon(ItemWeaponSO weapon)
     {
         var weaponFound = this.weapons.Find((c) => { return c.weapon.itemName == weapon.itemName; });
-        if (weaponFound != null)
+        if (weaponFound != null) 
         {
             weaponFound.amount -= 1;
 
-            if (weaponFound.amount == 0)
+            if (weaponFound.amount==0)
             {
                 return this.weapons.Remove(weaponFound);
             }
@@ -157,6 +179,23 @@ public class InventorySO : ScriptableObject
             if (consumableFound.amount == 0)
             {
                 return this.consumables.Remove(consumableFound);
+            }
+        }
+
+        return false;
+    }
+
+    public bool RemoveWeareable(ItemWeareableSO weareable, int negative)
+    {
+        var weareableFound = this.weareables.Find((c) => { return c.weareable.itemName == weareable.itemName; });
+
+        if (weareableFound != null)
+        {
+            weareableFound.amount = weareableFound.amount - negative;
+
+            if (weareableFound.amount == 0)
+            {
+                return this.weareables.Remove(weareableFound);
             }
         }
 
