@@ -25,7 +25,7 @@ MonoBehaviour:
   - {fileID: 3176927336938090717, guid: 239a24b9ccf6c4ac9af1352260c8daae, type: 3}
   - {fileID: 4022491437048491277, guid: 239a24b9ccf6c4ac9af1352260c8daae, type: 3}
   playerUnit: {fileID: 11400000, guid: 7d64dbc402bff4b40829054b56307d5b, type: 2}
-  gold: 9480
+  gold: 10000
   weapons: []
   consumables: []
   weareables: []

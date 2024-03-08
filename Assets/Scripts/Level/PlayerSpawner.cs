@@ -12,7 +12,7 @@ public class PlayerSpawner : MonoBehaviour
     [HideInInspector] public GameObject playerReference;
 
     public static PlayerSpawner Instance;
-    public string currentAnimationState = "Default";
+    public static string currentAnimationState = "Default";
 
     private void Awake()
     {
@@ -39,6 +39,7 @@ public class PlayerSpawner : MonoBehaviour
         }
 
         PlayerSpawner.Instance.playerReference.GetComponent<Animator>().SetBool(currentAnimationState, true);
+        Debug.Log(currentAnimationState);
     }
 
     private GameObject GetPlayer()

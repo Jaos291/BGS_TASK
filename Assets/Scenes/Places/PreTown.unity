@@ -13131,6 +13131,10 @@ PrefabInstance:
       propertyPath: playerPrefab
       value: 
       objectReference: {fileID: 712805384916534441, guid: f16ab1c83a4734ffa94f6baae39e82c1, type: 3}
+    - target: {fileID: 6799456983925213091, guid: 8d29d735847f944e7a69ef2a69905767, type: 3}
+      propertyPath: currentAnimationState
+      value: 
+      objectReference: {fileID: 0}
     - target: {fileID: 9121014772694926195, guid: 8d29d735847f944e7a69ef2a69905767, type: 3}
       propertyPath: m_Name
       value: LevelInitializer

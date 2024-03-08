@@ -250,7 +250,7 @@ public class ShopManager : MonoBehaviour
             }
 
             PlayerSpawner.Instance.playerReference.GetComponent<Animator>().SetBool(this._shopInventory.weareables[itemId].weareable.animationType, true);
-            PlayerSpawner.Instance.currentAnimationState = this._shopInventory.weareables[itemId].weareable.animationType;
+            PlayerSpawner.currentAnimationState = this._shopInventory.weareables[itemId].weareable.animationType;
 
             foreach (var weareable in playerInventory.weareables)
             {
